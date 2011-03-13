@@ -66,9 +66,10 @@ module Rack
           end
 
           def collection
-            Server.database["oauth2.clients"]
+            Server.database["oauth2-clients"]
           end
-        end
+        end 
+        # end of class methods
 
         # Client identifier.
         attr_reader :_id

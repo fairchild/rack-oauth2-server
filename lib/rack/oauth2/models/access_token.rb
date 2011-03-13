@@ -83,7 +83,7 @@ module Rack
           end
 
           def collection
-            Server.database["oauth2.access_tokens"]
+            Server.database["oauth2-access_tokens"]
           end
         end
 

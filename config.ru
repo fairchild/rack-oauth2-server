@@ -1,5 +1,9 @@
 $: << File.dirname(__FILE__) + "/lib"
-require "rack/oauth2/server"
+require 'rubygems'
+require 'sinatra'
+require "rack/oauth2/sinatra"
+require "rack/oauth2/server/admin"
+
 Rack::OAuth2::Server.database = Mongo::Connection.new["test"]
 
 class Authorize < Sinatra::Base

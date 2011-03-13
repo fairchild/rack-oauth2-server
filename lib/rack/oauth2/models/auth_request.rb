@@ -28,7 +28,7 @@ module Rack
           end
 
           def collection
-            Server.database["oauth2.auth_requests"]
+            Server.database["oauth2-auth_requests"]
           end
         end
 
