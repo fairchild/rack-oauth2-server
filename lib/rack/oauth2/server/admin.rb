@@ -114,10 +114,11 @@ module Rack
         # redirects to the authorization endpoint. This redirect does accept the
         # state parameter, which will be returned after authorization.
         get "/authorize" do
-          redirect_uri = "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
+          redirect_uri= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_X_FORWARDED_HOST'] || request.env['HTTP_HOST']}#{request.env['SCRIPT_NAME']}"
+          # redirect_uri = "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
           query = { :client_id=>settings.client_id, :client_secret=>settings.client_secret, :state=>params[:state],
                     :response_type=>"token", :scope=>"oauth-admin", :redirect_uri=>redirect_uri }
-          auth_url = settings.authorize || "#{request.scheme}://#{request.host}:#{request.port}/oauth/authorize"
+          auth_url = settings.authorize || "#{request.env['rack.url_scheme']}://#{request.env['HTTP_X_FORWARDED_HOST'] || request.env['HTTP_HOST']}/oauth/authorize"
           redirect "#{auth_url}?#{Rack::Utils.build_query(query)}"
         end
 

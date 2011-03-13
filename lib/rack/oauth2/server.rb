@@ -285,7 +285,7 @@ module Rack
             # Create object to track authorization request and let application
             # handle the rest.
             auth_request = AuthRequest.create(client, requested_scope, redirect_uri.to_s, response_type, state)
-            uri = URI.parse(request.url)
+            uri = URI.parse("#{request.env['rack.url_scheme']}://#{request.env['HTTP_X_FORWARDED_HOST'] || request.env['HTTP_HOST']}#{request.env['REQUEST_URI']}")
             uri.query = "authorization=#{auth_request.id.to_s}"
             return [303, { "Location"=>uri.to_s }, ["You are being redirected"]]
           end
