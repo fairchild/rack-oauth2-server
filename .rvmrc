@@ -1,3 +1,4 @@
 export RUBYOPT="rubygems"
 export RUBYLIB="."
-rvm 1.8.7@rack-oauth2-server
+rvm ruby-1.9.2-p180
+
